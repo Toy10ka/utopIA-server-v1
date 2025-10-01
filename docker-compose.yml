@@ -1,0 +1,88 @@
+# 3つのサービス（コンテナ）をまとめて起動・管理
+
+# 1. utopia-server: Dockerfileから作成したイメージによるコンテナ．
+# Unityがアクセスするメイン(API提供)サーバ（開発するFlaskアプリ）で，
+# LLMや音声合成は持っていないので裏でollama, voiceboxにリクエストを投げる
+
+# 2. ollama: ローカルでLLMを動かすサーバ．公式イメージ利用．utopia-server経由で利用
+
+# 3. voicevox-engine: 音声合成サーバ．公式イメージ利用．utopia-server経由で利用
+
+# ------------------------------------------------------------------------
+services:
+  # サービス1: メインのAPIサーバ
+  utopia-server:
+    # Dockerfileからビルド
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # ソースとモデル分けてボリューム
+    volumes: 
+      - ./src:/app
+      - ./models:/models
+    # ホストPCの5000を，コンテナの5000(flaskアプリ待機させてる)にマッピング
+    # ホストPCの localhost:5000 にアクセスすると，その通信がコンテナ内の5000番ポートに転送
+    ports:
+      - "5000:5000"
+    # NVIDIA GPU 指定（古い書き方なので将来直すかも）
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      # コンテナ間通信をlocalhostでなくサービス名（URL）で．環境変数を渡す
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - VOICEVOX_BASE_URL=http://voicevox-engine:50021
+    # まず音声，LLMサーバを起動してから
+    depends_on:
+      ollama:
+      # “起動順”だけでなく“準備完了”を待つことにする
+      # utopia-server が起動直後に ollama / voicevox へ即アクセスする可能性があるから
+        condition: service_healthy 
+      voicevox-engine:
+        condition: service_healthy
+  
+  # ----------
+
+  # サービス2: LLMサーバ
+  ollama:
+    # Dockerhubのイメージからビルド
+    image: ollama/ollama
+    # ollama標準ポート番号にマッピング
+    ports:
+      - "11434:11434"
+    # コンテナにダウンロードされたLLMモデル（/root/.ollamaに入る）をvolumesして，ホストPCにも残す
+    volumes:
+      - ./ollama_data:/root/.ollama
+    # NVIDIA GPU 指定
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    # test成功ならhealty, 失敗ならunhealty (ollama の公式イメージには bash や curl が入ってないかも)
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ollama list >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 3s
+      retries: 60
+      start_period: 60s
+
+  # ----------
+  
+  # サービス3: 音声合成サーバ
+  voicevox-engine:
+    # latestがcpuだと困るのでタグを指定
+    # Ubuntu 22.04をベースにし，NVIDIA Container Toolkit を前提としてビルドされたもの
+    image: voicevox/voicevox_engine:nvidia-ubuntu22.04-0.25.0-dev
+    # VOICEVOX標準ポート番号にマッピング
+    ports:
+      - "50021:50021"
+    # NVIDIA GPU 指定
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    # test成功ならhealty, 失敗ならunhealty
+    healthcheck:
+      test: ["CMD", "bash", "-lc", "curl -sf http://localhost:50021/version >/dev/null"]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+  # ----------

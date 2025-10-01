@@ -1,0 +1,33 @@
+// 開発環境をどう作って、どう起動して、VS Code をどう接続するか
+// utopia-serverコンテナにVS Codeを接続
+{
+    // 開発環境表示名
+    "name": "utopIA1 Dev", 
+
+    // 用いるcompose（配列：複数指定可）
+    "dockerComposeFile":["../docker-compose.yml"], 
+
+    // 接続先サービス (コンテナ)
+    "service": "utopia-server",
+
+    // vscodeが開く作業ディレクトリ
+    "workspaceFolder": "/app",
+
+    // Dockerfile の CMD(gunicorn) を上書きしない
+    // Dev Containers はdockerのCMDをデフォルトで上書きする
+    "overrideCommand": false,
+
+    // VS Code拡張機能
+    "customizations": {
+        "vscode": {
+            "extensions": [ 
+                "ms-python.python", // （Python コード実行／デバッグ）
+                "ms-python.vscode-pylance" // （型情報＋高速補完）
+            ]
+        }
+    }, 
+
+	// VS Code の開発コンテナを閉じたときの挙動 
+    // 開発中にUnityからAPIをよく叩きそうなので，閉じても動くようにした（DockerDesktop落とさないと落ちない)
+	"shutdownAction": "none"
+}

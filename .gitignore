@@ -1,0 +1,49 @@
+# --- Python / ビルドキャッシュ ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.mypy_cache/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+
+# --- 仮想環境 ---
+.venv/
+venv/
+env/
+
+# --- VS Code / OS ---
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Docker 関連（追跡不要なもの） ---
+# ローカルのモデルや履歴
+ollama_data/
+models/
+
+# 生成物（動作確認でできるファイル）
+src/audio.wav
+src/req.json
+src/query.json
+
+# 一時ファイル
+*.log
+*.tmp
+tmp/
+**/.idea/
+
+# --- Secrets（将来置くなら） ---
+.env
+*.key
+*.pem
+
+# --- Node/Unity等を将来入れる場合の保険 ---
+node_modules/
+Library/
+Temp/
+Logs/
+obj/

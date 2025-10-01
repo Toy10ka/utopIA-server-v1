@@ -1,0 +1,12 @@
+# Flaskとその他の依存ライブラリのリスト
+flask
+flask-sock
+gunicorn
+# WebSocket は HTTPじゃない別プロトコルなので、「WSをしゃべれるサーバ（worker）」が必要
+gevent
+gevent-websocket
+
+# Ollama や VOICEVOX の依存は公式イメージが持っている
+
+# 他のサーバーと通信するため(Python の HTTP 通信ライブラリ。API を叩いたり、他サービスと連携するのに使う。)
+requests
