@@ -1,4 +1,4 @@
-# utopIA-v1
+# utopIA-server-v1
 
 Unity から HTTP で叩ける **テキスト→LLM→音声合成** ゲートウェイ。  
 Docker Compose で **Ollama（LLM）** と **VOICEVOX ENGINE（TTS）** を起動し、  
