@@ -27,6 +27,7 @@ models/
 
 # 生成物（動作確認でできるファイル）
 src/audio.wav
+src/answer.wav
 src/req.json
 src/query.json
 

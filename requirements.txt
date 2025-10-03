@@ -8,5 +8,5 @@ gevent-websocket
 
 # Ollama や VOICEVOX の依存は公式イメージが持っている
 
-# 他のサーバーと通信するため(Python の HTTP 通信ライブラリ。API を叩いたり、他サービスと連携するのに使う。)
+# 他サーバ(u->ollama, vve)へHTTPリクエストする際に使用
 requests
