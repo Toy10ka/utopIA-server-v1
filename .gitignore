@@ -37,7 +37,7 @@ src/query.json
 tmp/
 **/.idea/
 
-# --- Secrets（将来置くなら） ---
+# --- Secrets（将来） ---
 .env
 *.key
 *.pem

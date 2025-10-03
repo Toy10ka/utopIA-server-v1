@@ -25,7 +25,7 @@ curl -s \
   -X POST \
   -d @/tmp/query.json \
   "http://voicevox-engine:50021/synthesis?speaker=1" \
-  > /app/audio.wav # ホストの./srcをappにvolumeしていることを忘れない
+  > /app/audio.wav 
 
 
 

@@ -108,7 +108,7 @@ def api_ask_tts(): # 処理
         
 # -----------------
 
-# デバッグ用：テキスト({"text":"hoge"})だけ欲しい時のAPI
+# デバッグ用：テキスト({"text":"hoge"})だけ欲しい際のAPI
 @app.post("/api/ask_text")
 def api_ask_text():
     body = request.get_json(force=True)

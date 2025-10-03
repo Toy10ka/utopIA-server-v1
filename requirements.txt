@@ -8,5 +8,5 @@ gevent-websocket
 
 # Ollama や VOICEVOX の依存は公式イメージが持っている
 
-# 他サーバ(u->ollama, vve)へHTTPリクエストする際に使用
+# 他サーバ(u->ollama, vve)へHTTPリクエストする際
 requests

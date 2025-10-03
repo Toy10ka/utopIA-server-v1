@@ -19,11 +19,6 @@
 
 # b) 音声（/api/ask_tts）
 
-# curl -s http://localhost:5000/api/ask_tts \
-#   -H "Content-Type: application/json" \
-#   -d '{"prompt":"自己紹介を一文で。","speaker":1}' \
-#   -o ./answer.wav # レスポンスをファイル保存
-
 cat > req.json <<'JSON'
 {"prompt":"自己紹介を一文で。","speaker":1}
 JSON
