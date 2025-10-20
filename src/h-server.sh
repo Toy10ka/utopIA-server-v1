@@ -20,7 +20,7 @@
 # b) 音声（/api/ask_tts）
 
 cat > req.json <<'JSON'
-{"prompt":"自己紹介を一文で。","speaker":1}
+{"prompt":"自己紹介を一文で。","speaker":8}
 JSON
 
 curl -sS http://localhost:5000/api/ask_tts \
