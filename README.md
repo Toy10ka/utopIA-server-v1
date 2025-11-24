@@ -32,12 +32,12 @@ graph LR
 
     subgraph Docker Compose [utopia-server]
         Server[Flask API]
-        STT[faster-whisper\n(Internal)]
+        STT["faster-whisper<br/>(Internal)"]
         LLM[Ollama]
         TTS[Voicevox Engine]
     end
 
-    Client -->|1. 音声 (WAV)| Server
+    Client -->|1. 音声| Server
     Server -->|2. 認識| STT
     STT -->|3. テキスト| Server
     
@@ -45,7 +45,7 @@ graph LR
     LLM -->|5. 回答テキスト| Server
     
     Server -->|6. 音声合成| TTS
-    TTS -->|7. 音声 (WAV)| Server
+    TTS -->|7. 音声| Server
     
     Server -->|8. レスポンス| Client
 ```
