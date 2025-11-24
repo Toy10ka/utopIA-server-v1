@@ -15,11 +15,6 @@ Flask（utopia-server）が両者を中継します。
 Unity ─HTTP→ utopia-server(Flask) ─HTTP→ ollama(LLM)
                                └───HTTP→ voicevox-engine(TTS)
 ```
-
-## 前提
-- Docker Desktop（NVIDIA GPU があれば CUDA で高速化）
-- VS Code + Dev Containers（任意）
-
 ## クイックスタート
 ```bash
 # 1) 起動
@@ -53,7 +48,7 @@ docker compose exec utopia-server bash -lc "python server.py"
   - res: `audio/wav`（バイナリ）
 
 > 内部では `/api/chat`（Ollama）と `/audio_query` `/synthesis`（VOICEVOX）を使用。  
-> モデル常駐には `keep_alive: "10m"` を付与。
+> モデル常駐には `keep_alive: "10m"` 等を付与。
 
 ## ディレクトリ
 ```
@@ -96,12 +91,7 @@ var res = await client.PostAsync("http://<host>:5000/api/ask_tts",
 File.WriteAllBytes("answer.wav", await res.Content.ReadAsByteArrayAsync());
 ```
 
-## トラブルシュート
-- **WAV が 1KB / 再生不可**: `audio_query` を `--data-urlencode`、`synthesis` は `--data-binary @` で送る。  
-- **日本語が通らない**: JSONは UTF-8。Windows ターミナルは UTF-8 / スクリプトは LF を推奨。  
-- **初回だけ遅い**: モデルのプレウォーム or `keep_alive: "10m"` を付与。  
-- **コンテナ間疎通**: `http://サービス名:ポート` を使う（`localhost` は×）。
 
 ## ライセンス
-- このリポジトリ: MIT（例）  
+- このリポジトリ: MIT 
 - VOICEVOX ENGINE / モデル: それぞれのライセンスに従うこと
