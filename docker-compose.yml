@@ -31,6 +31,10 @@ services:
       # コンテナ間通信をlocalhostでなくサービス名（URL）で．環境変数を渡す
       - OLLAMA_BASE_URL=http://ollama:11434
       - VOICEVOX_BASE_URL=http://voicevox-engine:50021
+      # stt用に追加
+      - STT_MODEL_NAME=large-v3
+      - STT_COMPUTE_TYPE=float16   # VRAMきつくなったらint8_float16 に変更
+      - STT_DEVICE=cuda            # CPUで動かすならcpu
     # まず音声，LLMサーバを起動してから
     depends_on:
       ollama:

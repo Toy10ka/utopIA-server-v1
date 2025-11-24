@@ -10,3 +10,8 @@ gevent-websocket
 
 # 他サーバ(u->ollama, vve)へHTTPリクエストする際
 requests
+
+# stt用
+faster-whisper
+soundfile
+
