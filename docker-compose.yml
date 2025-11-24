@@ -35,6 +35,9 @@ services:
       - STT_MODEL_NAME=large-v3
       - STT_COMPUTE_TYPE=float16   # VRAMきつくなったらint8_float16 に変更
       - STT_DEVICE=cuda            # CPUで動かすならcpu
+      # faster-whisper のモデルキャッシュを永続化するために保存先をmodelsに変更
+      # （デフォルトは /root/.cache/huggingface でコンテナ再作成時に消える）
+      - HF_HOME=/models
     # まず音声，LLMサーバを起動してから
     depends_on:
       ollama:
