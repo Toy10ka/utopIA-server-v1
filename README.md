@@ -106,7 +106,7 @@ curl -X POST "http://localhost:5000/api/ask_tts" \
       "text": "こんにちは、音声認識のテストです。",
       "language": "ja",
       "duration_sec": 3.5,
-      "segments": [ 詳細なタイムスタンプ情報 ]
+      "segments": ["詳細なタイムスタンプ情報"]
     }
     ```
 
