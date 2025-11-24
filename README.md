@@ -180,7 +180,14 @@ services:
 ├─ requirements.txt      # utopia-server 用 Python 依存
 └─ README.md
 ```
+## 🗺️ 今後の展望 
+### 💃 体 (Body): 動作生成 
+本リポジトリの v1 時点では「耳・脳・口」を中心に実装していますが、
+長期的には、**Text-to-Motion (TTM)** 技術を用いたキャラクターモーション生成機能の統合を目指しています。
+
+特に、リアルタイム性とキャラクタが置かれる環境とのインタラクションを考慮した **RTI-TTM（Realtime Interactive Text-to-Motion）** のアーキテクチャの設計や関連技術の調査に取り組んでいます。
+
 
 ## ライセンス
-MIT License
-
+- このリポジトリ: MIT 
+- 使用している外部ツール・ライブラリ: それぞれのライセンスに従うこと
