@@ -1,13 +1,6 @@
 # utopIA-server-v1
 
 Unity などのクライアントから利用するための **ローカル音声対話サーバ**です。
-
-- 耳 (STT): 音声認識 – [faster-whisper](https://github.com/SYSTRAN/faster-whisper)
-- 脳 (LLM): テキスト生成 – [Ollama](https://github.com/ollama/ollama)
-- 口 (TTS): 音声合成 – [VOICEVOX ENGINE](https://github.com/VOICEVOX/voicevox_engine)
-
-Docker Compose で 3 つのサービスをまとめて起動し、HTTP API を通じて Unity から
-
 Docker Compose で faster-whisper (音声認識)、Ollama (LLM)、VOICEVOX (音声合成) の3 つのサービスをまとめて起動し、Flask アプリケーションがそれらを統合制御します。
 
 ## 🚀 機能概要（耳・脳・口）
