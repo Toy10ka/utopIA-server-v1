@@ -29,13 +29,21 @@ Docker Compose で **faster-whisper (音声認識)**、**Ollama (LLM)**、**VOIC
 graph LR
     Client[Unity / Client]
 
-    subgraph Docker Compose [utopia-server]
+    %% サブグラフの定義
+    subgraph DockerEnv [🐳 Docker Compose : utopia-server]
+        direction TB
+        
+        Padding[ ]
+        
+        Padding ~~~ STT
+
         Server[Flask API]
         STT["faster-whisper<br/>(Internal)"]
         LLM[Ollama]
         TTS[Voicevox Engine]
     end
 
+    %% フローの定義
     Client -->|1. 音声| Server
     Server -->|2. 認識| STT
     STT -->|3. テキスト| Server
@@ -47,6 +55,18 @@ graph LR
     TTS -->|7. 音声| Server
     
     Server -->|8. レスポンス| Client
+
+    %% スタイルの適用
+    style DockerEnv fill:#e3f2fd,stroke:#0277bd,stroke-width:2px,stroke-dasharray: 5 5,rx:10,ry:10
+    style Client fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    
+    style Server fill:#fff,stroke:#333
+    style STT fill:#fff,stroke:#333
+    style LLM fill:#fff,stroke:#333
+    style TTS fill:#fff,stroke:#333
+
+    style Padding fill:none,stroke:none,width:0px,height:50px
+
 ```
 ## ⚡ クイックスタート
 
