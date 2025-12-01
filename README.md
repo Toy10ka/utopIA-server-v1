@@ -4,6 +4,11 @@ Unity などのクライアントから利用するための **ローカル音�
 
 Docker Compose で **faster-whisper (音声認識)**、**Ollama (LLM)**、**VOICEVOX (音声合成)** の3つのサービスを一括管理し、Flask アプリケーションがそれらを統合制御します。
 
+なお、本サーバを **バックエンド** として動作するVR音声対話クライアント (フロントエンド) `utopIA-client-v1` を、以下のリポジトリで公開しています。
+
+フロントエンド:
+* [https://github.com/Toy10ka/utopIA-client-v1](https://github.com/Toy10ka/utopIA-client-v1)
+
 ## 🚀 機能概要（耳・脳・口）
 
 現時点では、人間の感覚処理の順序（聞く → 考える → 話す）に対応した 3 つの API を提供しています。
